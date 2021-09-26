@@ -1,8 +1,8 @@
-# Quick
+# Quick (HTTP/3, Symlinks, ESI Injection)
 
-[Quick.pdf](Quick%20b191dc627ddb4687b87c5ba82acd5c1f/Quick.pdf)
+Quick is a hard difficulty Linux machine that features a website running on the  HTTP/3 protocol. Enumeration of the website reveals default credentials. The client portal is found to be vulnerable to ESI (Edge Side Includes) injection. This is used to obtain code execution and gain a foothold. A weak password gives access to a printer console, which permits the addition of new printers. Weak file permissions are exploited to move laterally. Plaintext credentials exposed in a configuration are reused to escalate to root. The official HTB writeup is below:
 
-Quick is a hard difficulty Linux machine that features a website running on the  HTTP/3 protocol. Enumeration of the website reveals default credentials. The client portal is found to be vulnerable to ESI (Edge Side Includes) injection. This is used to obtain code execution and gain a foothold. A weak password gives access to a printer console, which permits the addition of new printers. Weak file permissions are exploited to move laterally. Plaintext credentials exposed in a configuration are reused to escalate to root.
+[Quick.pdf](Quick%20(HTTP%203,%20Symlinks,%20ESI%20Injection)%20b191dc627ddb4687b87c5ba82acd5c1f/Quick.pdf)
 
 ## Skills Learned:
 
@@ -14,6 +14,27 @@ Quick is a hard difficulty Linux machine that features a website running on the 
 
 ### Problems I Ran Into
 
+1. **Installing Quiche**
+- Since you cannot connect to HTTP/3 via normal browsers like firefox or chrome, you have to use the QUIC protocol
+- You can use a client called quiche which can be found [here](https://developers.cloudflare.com/http3/intro/http3-client/)
+- To install this client properly you need the correct version of rust and cargo and these can be installed using rustup
+
+```
+sudo apt autoremove rustc
+sudo apt autoremove cargo
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+// Rustup installs the latest versions of rustc and cargo
+// Never run cargo as sudo, it won't allow you anyway 
+// You might also want to install cmake if it is not installed already
+// Don't clone the quiche repository in a directory owned by root
+git clone --recursive https://github.com/cloudflare/quiche.git
+cd quiche
+cargo build --examples
+// you will find the HTTP/3 client in:
+cd target/debug/examples 
+```
+
+1. **Foothold**
 - problem I ran into was getting the shell. the server from the attacker machine is supposed to be a PHP server because that one executes when it is connected to. run this with `sudo php -S 0.0.0.0:80`
 - make an empty `xml` file on your attacker machine eg `pwn.xml`
 - make the `esi.xsl` on your machine as well (same folder)
