@@ -34,7 +34,7 @@ cargo build --examples
 cd target/debug/examples 
 ```
 
-1. **Foothold**
+2. **Foothold**
 - problem I ran into was getting the shell. the server from the attacker machine is supposed to be a PHP server because that one executes when it is connected to. run this with `sudo php -S 0.0.0.0:80`
 - make an empty `xml` file on your attacker machine eg `pwn.xml`
 - make the `esi.xsl` on your machine as well (same folder)
