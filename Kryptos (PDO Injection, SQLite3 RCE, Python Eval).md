@@ -66,6 +66,7 @@ RCE via the `eval` function.
         ```
         
         - `<class 'os.wrap_close'>` is found to be number 134
+    ![os Class](https://scriptkiddiehub.com/wp-content/uploads/2021/10/kryptos.png)
     - Set up your nc listener and run the following tweaked `brute.py`
     - Now here is the tweaked `[brute.py](http://brute.py)` :
     
